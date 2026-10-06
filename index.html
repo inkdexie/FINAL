@@ -69,14 +69,57 @@
       </div>
     </section>
 
+    <section class="card mb-4">
+      <div class="card-body">
+        <h2 class="h5 mb-3">运行方式</h2>
+        <ul class="mb-0">
+          <li><strong>直接双击</strong> index.html 即可打开（fetch 失败时自动回退到本地脚本加载数据）。</li>
+          <li><strong>本地服务器</strong>（推荐，用于测试网络失败状态）：在项目目录执行 <code>python -m http.server 8000</code>，浏览器访问 <code>http://localhost:8000/</code>。</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card mb-4">
+      <div class="card-body">
+        <h2 class="h5 mb-3">错误处理说明</h2>
+        <div class="table-responsive">
+          <table class="table table-sm align-middle mb-0">
+            <thead class="table-light">
+              <tr>
+                <th>场景</th>
+                <th>处理方式</th>
+                <th>测试方法</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>网络失败</td>
+                <td>显示"加载失败：无法获取数据文件"红色提示，自习室页自动回退到本地数据</td>
+                <td>F12 → Network 勾选 Offline → 刷新页面</td>
+              </tr>
+              <tr>
+                <td>数据为空</td>
+                <td>显示"暂无数据"或"暂无数据，请添加自习室"黄色提示</td>
+                <td>自习室页删除全部记录；或把 data/stats.json 中 rooms 改为 []</td>
+              </tr>
+              <tr>
+                <td>非法输入</td>
+                <td>添加自习室时校验名称非空、座位数为正整数、已用数在 0 到总数之间，错误以红色文字提示</td>
+                <td>自习室页点"+ 添加自习室"，留空名称或座位数填 0 后确认</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
     <section class="card">
       <div class="card-body">
-        <h2 class="h5 mb-3">使用说明</h2>
+        <h2 class="h5 mb-3">功能说明</h2>
         <ul class="mb-0">
-          <li>数据通过本地 JSON 加载，自习室记录支持浏览器本地保存。</li>
-          <li>自习室页可按楼层、开放状态筛选，并支持搜索与增删。</li>
-          <li>统计页展示两类图表，含加载、空数据与失败状态提示。</li>
-          <li>校园三维页可用鼠标拖拽旋转、滚轮缩放浏览场景。</li>
+          <li>自习室页：按楼层、开放状态、类型筛选，支持名称搜索与添加/删除，数据保存在 localStorage。</li>
+          <li>统计页：Chart.js 柱状图（自习室使用量）+ ECharts 折线图（入馆趋势），均含标题、单位、数据来源。</li>
+          <li>校园三维：Three.js 渲染图书馆、教学楼、食堂等建筑，可拖拽旋转、滚轮缩放。</li>
         </ul>
       </div>
     </section>
