@@ -80,10 +80,11 @@ const applyData = (data) => {
     setStatus('暂无数据', 'warning');
     return;
   }
-  renderBar(data.bar);
-  renderLine(data.line);
   $('#charts').removeClass('d-none');
   $('#status').addClass('d-none');
+  renderBar(data.bar);
+  renderLine(data.line);
+  setTimeout(() => { if (lineChart) lineChart.resize(); }, 50);
 };
 
 const loadScriptFallback = () => {
