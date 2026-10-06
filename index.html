@@ -69,47 +69,61 @@
       </div>
     </section>
 
-    <section class="card mb-4">
-      <div class="card-body">
-        <h2 class="h5 mb-3">运行方式</h2>
-        <ul class="mb-0">
-          <li><strong>直接双击</strong> index.html 即可打开（fetch 失败时自动回退到本地脚本加载数据）。</li>
-          <li><strong>本地服务器</strong>（推荐，用于测试网络失败状态）：在项目目录执行 <code>python -m http.server 8000</code>，浏览器访问 <code>http://localhost:8000/</code>。</li>
-        </ul>
+    <section class="mb-5">
+      <h2 class="mb-4">校园概览</h2>
+      <div class="row g-3">
+        <div class="col-6 col-md-3">
+          <div class="card text-center">
+            <div class="card-body">
+              <h3 class="display-6 text-primary mb-0">9</h3>
+              <p class="text-muted small mb-0">自习室总数</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="card text-center">
+            <div class="card-body">
+              <h3 class="display-6 text-success mb-0">6</h3>
+              <p class="text-muted small mb-0">开放中</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="card text-center">
+            <div class="card-body">
+              <h3 class="display-6 text-warning mb-0">149</h3>
+              <p class="text-muted small mb-0">空余座位</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="card text-center">
+            <div class="card-body">
+              <h3 class="display-6 text-info mb-0">2309</h3>
+              <p class="text-muted small mb-0">本周入馆人次</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
     <section class="card mb-4">
       <div class="card-body">
-        <h2 class="h5 mb-3">错误处理说明</h2>
-        <div class="table-responsive">
-          <table class="table table-sm align-middle mb-0">
-            <thead class="table-light">
-              <tr>
-                <th>场景</th>
-                <th>处理方式</th>
-                <th>测试方法</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>网络失败</td>
-                <td>显示"加载失败：无法获取数据文件"红色提示，自习室页自动回退到本地数据</td>
-                <td>F12 → Network 勾选 Offline → 刷新页面</td>
-              </tr>
-              <tr>
-                <td>数据为空</td>
-                <td>显示"暂无数据"或"暂无数据，请添加自习室"黄色提示</td>
-                <td>自习室页删除全部记录；或把 data/stats.json 中 rooms 改为 []</td>
-              </tr>
-              <tr>
-                <td>非法输入</td>
-                <td>添加自习室时校验名称非空、座位数为正整数、已用数在 0 到总数之间，错误以红色文字提示</td>
-                <td>自习室页点"+ 添加自习室"，留空名称或座位数填 0 后确认</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <h2 class="h5 mb-3">通知公告</h2>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between">
+            <span>图书馆自习室国庆期间开放时间调整</span>
+            <span class="text-muted small">10-05</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span>203自习室因设备维护暂停开放</span>
+            <span class="text-muted small">10-03</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span>305研讨间支持线上预约，先到先得</span>
+            <span class="text-muted small">09-28</span>
+          </li>
+        </ul>
       </div>
     </section>
 
