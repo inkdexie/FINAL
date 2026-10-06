@@ -95,11 +95,46 @@ const addRoom = () => {
   showFormMsg('');
 };
 
+const applyData = (data) => {
+  if (!Array.isArray(data.rooms)) {
+    setStatus('数据格式错误：rooms 字段不是数组', 'danger');
+    return;
+  }
+  if (data.rooms.length === 0) {
+    setStatus('暂无数据，请添加自习室', 'warning');
+    $('#filter-panel').removeClass('d-none');
+    return;
+  }
+  rooms = data.rooms;
+  save();
+  $('#filter-panel').removeClass('d-none');
+  $('#status').addClass('d-none');
+  render();
+};
+
+const loadScriptFallback = () => {
+  if (window.__ROOMS_DATA__) {
+    applyData(window.__ROOMS_DATA__);
+    return;
+  }
+  const script = document.createElement('script');
+  script.src = 'data/rooms-data.js';
+  script.onload = () => {
+    if (window.__ROOMS_DATA__) {
+      applyData(window.__ROOMS_DATA__);
+    } else {
+      setStatus('加载失败：回退数据未找到', 'danger');
+    }
+  };
+  script.onerror = () => setStatus('加载失败：无法获取数据文件', 'danger');
+  document.head.appendChild(script);
+};
+
 const loadData = async () => {
   setStatus('加载中...', 'warning');
-  try {
-    const cached = localStorage.getItem(STORAGE_KEY);
-    if (cached) {
+  const cached = localStorage.getItem(STORAGE_KEY);
+  if (cached) {
+    try {
       const parsed = JSON.parse(cached);
       if (Array.isArray(parsed)) {
         rooms = parsed;
@@ -113,30 +148,24 @@ const loadData = async () => {
         render();
         return;
       }
+    } catch (e) {
+      localStorage.removeItem(STORAGE_KEY);
     }
+  }
 
+  try {
     const response = await fetch('data/rooms.json?t=' + Date.now());
     if (!response.ok) {
       throw new Error('HTTP ' + response.status);
     }
     const data = await response.json();
-    if (!Array.isArray(data.rooms)) {
-      setStatus('数据格式错误：rooms 字段不是数组', 'danger');
-      return;
-    }
-    if (data.rooms.length === 0) {
-      setStatus('暂无数据，请添加自习室', 'warning');
-      $('#filter-panel').removeClass('d-none');
-      return;
-    }
-    rooms = data.rooms;
-    save();
-    $('#filter-panel').removeClass('d-none');
-    $('#status').addClass('d-none');
-    render();
+    applyData(data);
   } catch (error) {
-    const msg = error instanceof SyntaxError ? '数据格式错误：JSON 无法解析' : error.message;
-    setStatus('加载失败：' + msg, 'danger');
+    if (error instanceof SyntaxError) {
+      setStatus('数据格式错误：JSON 无法解析', 'danger');
+      return;
+    }
+    loadScriptFallback();
   }
 };
 
