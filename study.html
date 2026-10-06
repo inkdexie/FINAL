@@ -32,6 +32,51 @@
 
     <div id="filter-panel" class="d-none">
       <div class="filter-bar">
+        <span class="filter-label">搜索</span>
+        <input type="text" class="form-control form-control-sm" id="search-input" placeholder="输入名称关键字" style="max-width: 240px;">
+        <button class="btn btn-sm btn-success ms-auto" data-bs-toggle="collapse" data-bs-target="#add-form">+ 添加自习室</button>
+      </div>
+
+      <div class="collapse card mb-3" id="add-form">
+        <div class="card-body">
+          <div class="row g-2">
+            <div class="col-md-3">
+              <input type="text" class="form-control form-control-sm" id="new-name" placeholder="名称（如 401自习室）">
+            </div>
+            <div class="col-md-2">
+              <select class="form-select form-select-sm" id="new-floor">
+                <option value="1楼">1楼</option>
+                <option value="2楼">2楼</option>
+                <option value="3楼">3楼</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <select class="form-select form-select-sm" id="new-type">
+                <option value="自习室">自习室</option>
+                <option value="研讨间">研讨间</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <input type="number" class="form-control form-control-sm" id="new-seats" placeholder="总座位数" min="1">
+            </div>
+            <div class="col-md-2">
+              <input type="number" class="form-control form-control-sm" id="new-used" placeholder="已用座位数" min="0">
+            </div>
+            <div class="col-md-1 d-flex align-items-center">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="new-open" checked>
+                <label class="form-check-label small" for="new-open">开放</label>
+              </div>
+            </div>
+          </div>
+          <div class="mt-2 d-flex align-items-center gap-2">
+            <button class="btn btn-primary btn-sm" id="add-btn">确认添加</button>
+            <span id="form-msg" class="text-danger small"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="filter-bar">
         <span class="filter-label">楼层</span>
         <div class="btn-group btn-group-sm" id="floor-filters" role="group" aria-label="按楼层筛选">
           <button type="button" class="btn btn-primary" data-floor="全部">全部</button>
